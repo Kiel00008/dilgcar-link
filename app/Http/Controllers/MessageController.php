@@ -2184,7 +2184,7 @@ OUTPUT: Return only the corrected (or original) response text. Do not add any me
         $t = mb_strtolower(trim($prompt));
 
         if ($t === '') {
-            return "Hi! What can I help you with?";
+            return "Hi! What ca I help you with?";
         }
 
         if (preg_match('/\\b(i\\s+love\\s+you|love\\s+you)\\b/i', $prompt)) {

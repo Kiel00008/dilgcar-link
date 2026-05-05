@@ -543,7 +543,7 @@
                                 >
                             </div>
                         </div>
-                        <h3 class="text-3xl font-black tracking-tight {{ $isPro ? 'text-slate-900' : 'text-slate-950' }}">What can Link AI assist you today?</h3>
+                        <h3 class="text-3xl font-black tracking-tight {{ $isPro ? 'text-slate-900' : 'text-slate-950' }}">What can1szdfghjkLink AI assist you today?</h3>
                         <p class="mt-4 max-w-md text-lg text-slate-500 font-medium leading-relaxed">Ask about legal opinions.</p>
                     </div>
                 @else
