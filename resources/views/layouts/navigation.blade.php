@@ -11,7 +11,7 @@
                                 <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                             </div>
                             <div class="min-w-0">
-                                <div class="text-[15px] font-black tracking-tight leading-tight text-white">{{ config('app.name', 'GABAY-Lex') }}</div>
+                                <div class="text-[15px] font-black tracking-tight leading-tight text-white">{{ config('app.name', 'Link - Ai') }}</div>
                                 <div class="text-[10px] font-semibold leading-tight tracking-wide text-white/80">Guidance and Advisory for Better Administration in Law</div>
                             </div>
                         </div>
@@ -38,6 +38,13 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
+                <button type="button" onclick="window.toggleTheme?.()" class="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/10 px-3 py-2 text-sm font-bold text-white/90 hover:bg-white/15 hover:text-white focus:outline-none transition ease-in-out duration-150">
+                    <span>Theme</span>
+                    <svg class="h-4 w-4 text-white/80" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10 2a.75.75 0 01.75.75V4a.75.75 0 01-1.5 0V2.75A.75.75 0 0110 2zm0 12a3 3 0 100-6 3 3 0 000 6zm8-3a.75.75 0 01-.75.75H16a.75.75 0 010-1.5h1.25A.75.75 0 0118 11zM4 11a.75.75 0 01-.75.75H2a.75.75 0 010-1.5h1.25A.75.75 0 014 11zm11.657-4.657a.75.75 0 011.06 0l0.884 0.884a.75.75 0 11-1.06 1.06l-0.884-0.884a.75.75 0 010-1.06zM5.343 14.657a.75.75 0 011.06 0l0.884 0.884a.75.75 0 11-1.06 1.06l-0.884-0.884a.75.75 0 010-1.06zM15.657 14.657a.75.75 0 010 1.06l-0.884 0.884a.75.75 0 11-1.06-1.06l0.884-0.884a.75.75 0 011.06 0zM5.343 5.343a.75.75 0 010 1.06l-0.884 0.884a.75.75 0 11-1.06-1.06l0.884-0.884a.75.75 0 011.06 0z" />
+                    </svg>
+                </button>
+
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center gap-2 rounded-2xl bg-white/10 px-3 py-2 text-sm font-bold text-white/90 ring-1 ring-white/15 hover:bg-white/15 hover:text-white focus:outline-none transition ease-in-out duration-150">
@@ -111,6 +118,10 @@
                 <x-responsive-nav-link class="text-white/90 hover:text-white hover:bg-white/10" :href="route('profile.edit')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
+
+                <button type="button" onclick="window.toggleTheme?.()" class="block w-full rounded-xl px-4 py-3 text-left text-sm font-semibold text-white/90 hover:text-white hover:bg-white/10">
+                    Toggle dark mode
+                </button>
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">

@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'GABAY-Lex') }}</title>
+        <title>{{ config('app.name', 'Link - Ai') }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -16,7 +16,7 @@
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @endif
     </head>
-    <body class="font-sans text-gray-900 antialiased">
+    <body class="font-sans text-slate-900 antialiased bg-slate-50 dark:bg-slate-950 dark:text-slate-100">
         @php
             $immersiveAuth = request()->routeIs('login');
         @endphp
@@ -26,7 +26,7 @@
                 {{ $slot }}
             </div>
         @else
-            <div class="min-h-screen flex flex-col items-center justify-center bg-slate-100 px-4 py-8">
+            <div class="min-h-screen flex flex-col items-center justify-center bg-slate-100 dark:bg-slate-950 px-4 py-8">
                 <div>
                     <a href="/">
                         <x-application-logo class="h-20 w-20 fill-current text-slate-500" />
@@ -38,5 +38,32 @@
                 </div>
             </div>
         @endif
+
+        <script>
+            const themeStorageKey = 'link-ai-theme';
+
+            const setTheme = (theme) => {
+                document.documentElement.classList.toggle('dark', theme === 'dark');
+                localStorage.setItem(themeStorageKey, theme);
+            };
+
+            const initTheme = () => {
+                const saved = localStorage.getItem(themeStorageKey);
+                if (saved === 'dark' || saved === 'light') {
+                    setTheme(saved);
+                    return;
+                }
+                if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    setTheme('dark');
+                }
+            };
+
+            window.toggleTheme = () => {
+                const isDark = document.documentElement.classList.toggle('dark');
+                localStorage.setItem(themeStorageKey, isDark ? 'dark' : 'light');
+            };
+
+            initTheme();
+        </script>
     </body>
 </html>

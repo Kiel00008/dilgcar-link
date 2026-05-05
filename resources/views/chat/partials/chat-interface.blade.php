@@ -7,6 +7,10 @@
         background: {{ $isPro ? 'transparent' : 'radial-gradient(circle at top left, rgba(14, 165, 233, 0.14), transparent 28%), radial-gradient(circle at bottom right, rgba(99, 102, 241, 0.14), transparent 32%), linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%)' }};
     }
 
+    .dark .chat-shell {
+        background: {{ $isPro ? 'transparent' : 'radial-gradient(circle at top left, rgba(14, 165, 233, 0.08), transparent 28%), radial-gradient(circle at bottom right, rgba(99, 102, 241, 0.08), transparent 32%), linear-gradient(180deg, #1a1f2e 0%, #0f1419 100%)' }};
+    }
+
     .chat-shell-with-lex {
         position: relative;
         isolation: isolate;
@@ -18,6 +22,13 @@
         box-shadow: {{ $isPro ? '0 24px 70px rgba(15, 23, 42, 0.08)' : '0 24px 80px rgba(15, 23, 42, 0.08)' }};
         border: {{ $isPro ? '1px solid rgba(15, 23, 42, 0.08)' : '1px solid rgba(255, 255, 255, 0.7)' }};
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .dark .chat-panel {
+        backdrop-filter: blur(24px);
+        background: {{ $isPro ? 'rgba(15, 23, 42, 0.75)' : 'rgba(15, 23, 42, 0.82)' }};
+        box-shadow: {{ $isPro ? '0 24px 70px rgba(0, 0, 0, 0.4)' : '0 24px 80px rgba(0, 0, 0, 0.4)' }};
+        border: {{ $isPro ? '1px solid rgba(255, 255, 255, 0.08)' : '1px solid rgba(255, 255, 255, 0.1)' }};
     }
 
     .pro-input-wrapper {
@@ -555,7 +566,7 @@
                                         {{ $message->role === 'user' ? 'You' : 'LX' }}
                                     </div>
                                     <div class="min-w-0">
-                                        <div class="text-xs font-black uppercase tracking-[0.2em] {{ $isPro ? 'text-slate-900' : 'text-slate-900' }}">{{ $message->role === 'user' ? 'You' : 'Lex' }}</div>
+                                        <div class="text-xs font-black uppercase tracking-[0.2em] {{ $isPro ? 'text-slate-900 dark:text-slate-100' : 'text-slate-900 dark:text-slate-100' }}">{{ $message->role === 'user' ? 'You' : 'Link AI' }}</div>
                                     </div>
                                 </div>
 
@@ -723,7 +734,7 @@
 
         const label = document.createElement('div');
         label.className = 'text-xs font-black uppercase tracking-[0.2em] ' + (isPro ? 'text-slate-900' : 'text-slate-900');
-        label.textContent = role === 'user' ? 'You' : 'Lex';
+        label.textContent = role === 'user' ? 'You' : 'Link AI';
 
         metaText.appendChild(label);
         meta.appendChild(avatar);

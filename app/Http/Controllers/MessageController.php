@@ -942,7 +942,7 @@ class MessageController extends Controller
 
     private function buildGeneralInfoParagraph(string $prompt, OpenAiChatClient $openai, GeminiChatClient $gemini, GroqChatClient $groq): string
     {
-        $instruction = 'You are Lex, the GABAY-Lex AI.
+        $instruction = 'You are Link - Ai, the Link AI assistant.
 
 Provide a concise general-information answer to the user\'s question in the Philippines.
 
@@ -972,7 +972,7 @@ Strict rules:
 
     private function buildGeneralInfoWithSources(string $prompt, OpenAiChatClient $openai, GeminiChatClient $gemini, GroqChatClient $groq): array
     {
-        $instruction = 'You are Lex, the GABAY-Lex AI.
+        $instruction = 'You are Link - Ai, the Link AI assistant.
 
 Provide a concise general-information answer to the user\'s question in the Philippines.
 
@@ -1178,7 +1178,7 @@ Output only the explanation + source lines (no extra headers).';
             return '';
         }
 
-        $instruction = 'You are Lex, the GABAY-Lex AI.
+        $instruction = 'You are Link - Ai, the Link AI assistant.
 
 Write a conclusion in 1–2 sentences that summarizes the practical legal takeaway for the user\'s question using ONLY the provided general information paragraph.
 
@@ -1362,7 +1362,7 @@ Strict rules:
 
     private function generateDirectAnswerAndConclusion(string $prompt, string $mainContextExcerpt, OpenAiChatClient $openai, GeminiChatClient $gemini, GroqChatClient $groq): array
     {
-        $instruction = 'You are Lex, the GABAY-Lex AI.
+        $instruction = 'You are Link - Ai, the Link AI assistant.
 
 Use ONLY the user question and the provided DILG opinion context excerpt. Do not add general information.
 
@@ -1419,7 +1419,7 @@ Conclusion:
             return [];
         }
 
-        $instruction = 'You are Lex, the GABAY-Lex AI.
+        $instruction = 'You are Link - Ai, the Link AI assistant.
 
 You will be given a USER QUESTION and multiple EXCERPTS from DILG legal opinions.
 
@@ -1556,7 +1556,7 @@ Only include labels that are present in the input.';
         $topic = trim($topic);
         $title = $topic !== '' ? $topic : $originalPrompt;
 
-        $instruction = 'You are Lex, the GABAY-Lex AI.
+        $instruction = 'You are Link - Ai, the Link AI assistant.
 
 The user asked for DILG legal opinions about a topic, but no matching DILG legal opinions were found in the stored DILG opinion library for this query.
 
@@ -2196,7 +2196,7 @@ OUTPUT: Return only the corrected (or original) response text. Do not add any me
         }
 
         if ($this->isSmallTalk($prompt)) {
-            return "Hi! I’m Lex. How can I help you today?";
+            return "Hi! I’m Link AI. How can I help you today?";
         }
 
         return "I’m having trouble connecting right now. Please try again in a moment.";
