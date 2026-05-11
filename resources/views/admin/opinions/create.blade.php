@@ -59,13 +59,13 @@
                 </div>
 
                 <div id="extract-panel" class="hidden rounded-[2rem] bg-slate-900/[0.02] p-8 ring-1 ring-slate-900/5">
-                    <div class="flex items-start justify-between gap-6">
-                        <div>
-                            <h3 class="text-xl font-extrabold text-slate-900 tracking-tight">Extract Document</h3>
-                            <p class="mt-1 text-sm text-slate-500">Upload a PDF/PPTX/XLSX and we will extract Title, Opinion Number &amp; Year, Date, and Context.</p>
-                        </div>
-                        <button id="btn-extract-back" type="button" class="px-6 py-3 text-sm font-bold text-slate-400 hover:text-slate-600 transition-colors">Back</button>
-                    </div>
+	                    <div class="flex items-start justify-between gap-6">
+	                        <div>
+	                            <h3 class="text-xl font-extrabold text-slate-900 tracking-tight">Extract Document</h3>
+	                            <p class="mt-1 text-sm text-slate-500">Upload a PDF/PPTX/XLSX and we will extract Title and Context.</p>
+	                        </div>
+	                        <button id="btn-extract-back" type="button" class="px-6 py-3 text-sm font-bold text-slate-400 hover:text-slate-600 transition-colors">Back</button>
+	                    </div>
 
                     <div class="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center">
                         <button id="btn-extract-choose" type="button" class="inline-flex items-center justify-center rounded-2xl bg-white px-8 py-3 text-sm font-bold text-slate-700 ring-1 ring-slate-900/10 hover:bg-slate-50 transition-all duration-300 shadow-sm">
@@ -89,23 +89,10 @@
                                 class="w-full rounded-2xl bg-white border-slate-900/10 px-6 py-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500/40 focus:ring-blue-500/15 transition-all">
                         </div>
 
-                        <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
-                            <div>
-                                <label class="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-3">Opinion Number and Year</label>
-                                <input id="extract-opinion-number" type="text"
-                                    class="w-full rounded-2xl bg-white border-slate-900/10 px-6 py-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500/40 focus:ring-blue-500/15 transition-all">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-3">Date</label>
-                                <input id="extract-date" type="text"
-                                    class="w-full rounded-2xl bg-white border-slate-900/10 px-6 py-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500/40 focus:ring-blue-500/15 transition-all">
-                            </div>
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-3">Context</label>
-                            <textarea id="extract-context" rows="14"
-                                class="w-full rounded-2xl bg-white border-slate-900/10 px-6 py-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500/40 focus:ring-blue-500/15 transition-all resize-y"></textarea>
+	                        <div>
+	                            <label class="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-3">Context</label>
+	                            <textarea id="extract-context" rows="14"
+	                                class="w-full rounded-2xl bg-white border-slate-900/10 px-6 py-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500/40 focus:ring-blue-500/15 transition-all resize-y"></textarea>
                         </div>
 
                         <div class="flex items-center justify-end gap-4">
@@ -117,29 +104,16 @@
                 </div>
 
                 <div id="opinion-main" class="grid grid-cols-1 gap-8">
-                    <div>
-                        <label class="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-3">Title</label>
-                        <input type="text" name="title" value="{{ old('title') }}" required
-                            class="w-full rounded-2xl bg-white border-slate-900/10 px-6 py-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500/40 focus:ring-blue-500/15 transition-all">
-                    </div>
+	                    <div>
+	                        <label class="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-3">Title</label>
+	                        <input type="text" name="title" value="{{ old('title') }}" required
+	                            class="w-full rounded-2xl bg-white border-slate-900/10 px-6 py-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500/40 focus:ring-blue-500/15 transition-all">
+	                    </div>
 
-                    <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-3">Opinion Number and Year</label>
-                            <input type="text" name="opinion_number" value="{{ old('opinion_number') }}" placeholder="Opinion No. 06, s. 2003" required
-                                class="w-full rounded-2xl bg-white border-slate-900/10 px-6 py-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500/40 focus:ring-blue-500/15 transition-all">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-3">Date</label>
-                            <input type="text" name="date" value="{{ old('date') }}" placeholder="mm/dd/yyyy" inputmode="numeric" pattern="[0-9]{1,2}/[0-9]{1,2}/[0-9]{4}" required
-                                class="w-full rounded-2xl bg-white border-slate-900/10 px-6 py-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500/40 focus:ring-blue-500/15 transition-all">
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-3">Context</label>
-                        <textarea name="context" rows="14"
-                            class="w-full rounded-2xl bg-white border-slate-900/10 px-6 py-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500/40 focus:ring-blue-500/15 transition-all resize-y">{{ old('context') }}</textarea>
+	                    <div>
+	                        <label class="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-3">Context</label>
+	                        <textarea name="context" rows="14"
+	                            class="w-full rounded-2xl bg-white border-slate-900/10 px-6 py-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500/40 focus:ring-blue-500/15 transition-all resize-y">{{ old('context') }}</textarea>
                     </div>
                 </div>
             </form>
@@ -148,24 +122,6 @@
 </x-admin-layout>
 
 <script>
-const d = document.querySelector('input[name="date"]');
-if (d) {
-    const f = v => {
-        const s = String(v || '').replace(/\D/g, '').slice(0, 8);
-        const a = [s.slice(0, 2), s.slice(2, 4), s.slice(4, 8)].filter(Boolean);
-        return a.join('/')
-    };
-    d.addEventListener('input', e => {
-        const v = e.target.value;
-        e.target.value = f(v)
-    });
-    d.addEventListener('keypress', e => {
-        if (!/[0-9]/.test(e.key)) e.preventDefault()
-    });
-    d.addEventListener('blur', e => {
-        e.target.value = f(e.target.value)
-    })
-}
 const s = document.getElementById('opinion-success');
 if (s) {
     setTimeout(() => {
@@ -215,16 +171,12 @@ const fname = document.getElementById('extract-file-name');
 const status = document.getElementById('extract-status');
 const err = document.getElementById('extract-error');
 const et = document.getElementById('extract-title');
-const eon = document.getElementById('extract-opinion-number');
-const ed = document.getElementById('extract-date');
 const ec = document.getElementById('extract-context');
 const apply = document.getElementById('btn-extract-apply');
 const titleInput = document.querySelector('input[name="title"]');
-const opinionInput = document.querySelector('input[name="opinion_number"]');
-const dateInput = document.querySelector('input[name="date"]');
 const ctx = document.querySelector('textarea[name="context"]');
 
-if (eb && ei && el && p && main && back && choose && fname && status && err && et && eon && ed && ec && apply && titleInput && opinionInput && dateInput && ctx) {
+if (eb && ei && el && p && main && back && choose && fname && status && err && et && ec && apply && titleInput && ctx) {
     const csrf = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
     const url = eb.getAttribute('data-extract-url') || '';
     let lastResult = null;
@@ -277,8 +229,6 @@ if (eb && ei && el && p && main && back && choose && fname && status && err && e
             if (!resp.ok) throw new Error(data.message || 'Extraction failed');
             lastResult = data;
             et.value = data.title || '';
-            eon.value = data.opinion_number || '';
-            ed.value = data.date || '';
             ec.value = data.context || '';
             apply.disabled = false;
             apply.classList.remove('opacity-60')
@@ -305,8 +255,6 @@ if (eb && ei && el && p && main && back && choose && fname && status && err && e
     apply.addEventListener('click', () => {
         if (!lastResult) return;
         titleInput.value = et.value;
-        opinionInput.value = eon.value;
-        dateInput.value = ed.value;
         ctx.value = ec.value;
         hidePanel()
     })

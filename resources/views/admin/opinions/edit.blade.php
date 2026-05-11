@@ -34,19 +34,6 @@
                             class="w-full rounded-2xl bg-white border-slate-900/10 px-6 py-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500/40 focus:ring-blue-500/15 transition-all">
                     </div>
 
-                    <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-3">Opinion Number and Year</label>
-                            <input type="text" name="opinion_number" value="{{ old('opinion_number', $opinion->opinion_number) }}" required
-                                class="w-full rounded-2xl bg-white border-slate-900/10 px-6 py-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500/40 focus:ring-blue-500/15 transition-all">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-3">Date</label>
-                            <input type="text" name="date" value="{{ old('date', optional($opinion->date)->format('m/d/Y')) }}" placeholder="mm/dd/yyyy" inputmode="numeric" pattern="[0-9]{1,2}/[0-9]{1,2}/[0-9]{4}" required
-                                class="w-full rounded-2xl bg-white border-slate-900/10 px-6 py-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-500/40 focus:ring-blue-500/15 transition-all">
-                        </div>
-                    </div>
-
                     <div>
                         <label class="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-3">Context</label>
                         <textarea name="context" rows="14"
@@ -64,6 +51,3 @@
         </div>
     </div>
 </x-admin-layout>
-<script>
-const d=document.querySelector('input[name="date"]');if(d){const f=v=>{const s=String(v||'').replace(/\D/g,'').slice(0,8);const a=[s.slice(0,2),s.slice(2,4),s.slice(4,8)].filter(Boolean);return a.join('/')};d.addEventListener('input',e=>{const v=e.target.value;e.target.value=f(v)});d.addEventListener('keypress',e=>{if(!/[0-9]/.test(e.key))e.preventDefault()});d.addEventListener('blur',e=>{e.target.value=f(e.target.value)})}
-</script>

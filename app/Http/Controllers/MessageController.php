@@ -509,8 +509,6 @@ class MessageController extends Controller
     {
         $systemPrompt = trim((string) config('services.chat.system_prompt', ''));
         $isSmallTalk = $this->isSmallTalk($prompt);
-        $isListRequest = $this->isOpinionListRequest($prompt);
-        $isSearchMode = ! $isSmallTalk && $isListRequest;
 
         if ($isSmallTalk) {
             return [
@@ -519,6 +517,63 @@ class MessageController extends Controller
                 'provider' => 'smalltalk',
             ];
         }
+
+        // Priority: FAQ Response Manager (pre-defined answers)
+        $faqMatch = $faqMatcher->findBestMatch($prompt);
+        if ($faqMatch) {
+            return [
+                'content' => $this->sanitizeAssistantText((string) $faqMatch->response),
+                'model' => 'faq',
+                'provider' => 'faq_response_manager',
+            ];
+        }
+
+        // If the user is not asking about legal/opinion-library topics, behave like a general assistant.
+        if (! $this->isLegalOrLibraryRelatedPrompt($prompt)) {
+            try {
+                $messages = [];
+                if ($systemPrompt !== '') {
+                    $messages[] = ['role' => 'system', 'content' => $systemPrompt];
+                }
+
+                foreach ($history as $m) {
+                    $role = (string) ($m['role'] ?? '');
+                    $content = (string) ($m['content'] ?? '');
+                    if ($role === '' || $content === '') {
+                        continue;
+                    }
+                    if (! in_array($role, ['user', 'assistant'], true)) {
+                        continue;
+                    }
+                    $messages[] = ['role' => $role, 'content' => $content];
+                }
+
+                $messages[] = ['role' => 'user', 'content' => $prompt];
+
+                $resp = $this->chatWithFallback($messages, $openai, $gemini, $groq);
+
+                return [
+                    'content' => $this->sanitizeAssistantText((string) ($resp['content'] ?? '')),
+                    'model' => (string) ($resp['model'] ?? 'chat'),
+                    'provider' => (string) ($resp['provider'] ?? 'ai'),
+                ];
+            } catch (AiRequestException $e) {
+                return [
+                    'content' => $this->formatAiErrorReply($e),
+                    'model' => 'error',
+                    'provider' => 'ai_error',
+                ];
+            } catch (\Throwable $e) {
+                return [
+                    'content' => 'I can’t reply right now due to an internal error. Please try again in a moment.',
+                    'model' => 'error',
+                    'provider' => 'ai_error',
+                ];
+            }
+        }
+
+        $isListRequest = $this->isOpinionListRequest($prompt);
+        $isSearchMode = $isListRequest;
 
         if ($isSearchMode) {
             $topic = $isListRequest ? $this->extractOpinionListTopic($prompt) : trim($prompt);
@@ -543,19 +598,6 @@ class MessageController extends Controller
                 'model' => 'opinion_search_list',
                 'provider' => 'opinion_retriever',
             ];
-        }
-
-        // Priority: FAQ Response Manager (pre-defined answers)
-        if (! $isSmallTalk) {
-            $faqMatch = $faqMatcher->findBestMatch($prompt);
-
-            if ($faqMatch) {
-                return [
-                    'content' => $this->sanitizeAssistantText((string) $faqMatch->response),
-                    'model' => 'faq',
-                    'provider' => 'faq_response_manager',
-                ];
-            }
         }
 
         try {
@@ -1638,6 +1680,44 @@ This answer is based on general legal information outside the stored DILG opinio
             if (preg_match($p, $t) === 1) {
                 return true;
             }
+        }
+
+        return false;
+    }
+
+    private function isLegalOrLibraryRelatedPrompt(string $prompt): bool
+    {
+        $t = mb_strtolower(trim($prompt));
+        if ($t === '') {
+            return false;
+        }
+
+        // Explicit opinion-library queries
+        if ($this->isOpinionListRequest($t)) {
+            return true;
+        }
+
+        $keywords = [
+            'legal', 'law', 'laws', 'lawful', 'illegal', 'illegally',
+            'ordinance', 'ordinansa', 'resolution', 'resolusyon',
+            'republic act', 'r.a.', 'ra ', 'batas', 'statute',
+            'section', 'article', 'rule', 'rules', 'regulation', 'regulations',
+            'jurisprudence', 'case', 'supreme court', 'court',
+            'dilg', 'dilg opinion', 'legal opinion', 'opinion number', 'memorandum circular', 'mc ',
+            'comelec', 'csc', 'coa', 'ombudsman',
+            'barangay', 'sk', 'sangguniang kabataan', 'katipunan ng kabataan',
+            'disqualified', 'qualified', 'qualification', 'age requirement', 'term of office',
+        ];
+
+        foreach ($keywords as $kw) {
+            if ($kw !== '' && str_contains($t, $kw)) {
+                return true;
+            }
+        }
+
+        // Matches like "RA 1234" or "R.A. 1234"
+        if (preg_match('/\b(r\.?\s*a\.?)\s*\d{3,6}\b/u', $t) === 1) {
+            return true;
         }
 
         return false;

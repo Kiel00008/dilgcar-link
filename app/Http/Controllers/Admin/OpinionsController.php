@@ -51,17 +51,26 @@ class OpinionsController extends Controller
     {
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
-            'opinion_number' => ['required', 'string', 'max:255'],
-            'date' => ['required', 'date_format:m/d/Y'],
+            'opinion_number' => ['nullable', 'string', 'max:255'],
+            'date' => ['nullable', 'date_format:m/d/Y'],
             'context' => ['nullable', 'string', 'required_without:context_file'],
             'context_file' => ['nullable', 'file', 'mimes:txt', 'max:5120', 'required_without:context'],
         ]);
 
         $context = $this->resolveContext($request);
-        $dateYmd = Carbon::createFromFormat('m/d/Y', $validated['date'])->format('Y-m-d');
+        $opinionNumber = trim((string) ($validated['opinion_number'] ?? ''));
+        if ($opinionNumber === '') {
+            $opinionNumber = 'N/A';
+        }
+
+        $dateInput = trim((string) ($validated['date'] ?? ''));
+        $dateYmd = $dateInput !== ''
+            ? Carbon::createFromFormat('m/d/Y', $dateInput)->format('Y-m-d')
+            : Carbon::now()->format('Y-m-d');
+
         $opinion = LegalOpinionLibrary::create([
             'title' => $validated['title'],
-            'opinion_number' => $validated['opinion_number'],
+            'opinion_number' => $opinionNumber,
             'date' => $dateYmd,
             'context' => $context,
         ]);
@@ -116,17 +125,26 @@ class OpinionsController extends Controller
     {
         $validated = $request->validate([
             'title' => ['required', 'string', 'max:255'],
-            'opinion_number' => ['required', 'string', 'max:255'],
-            'date' => ['required', 'date_format:m/d/Y'],
+            'opinion_number' => ['nullable', 'string', 'max:255'],
+            'date' => ['nullable', 'date_format:m/d/Y'],
             'context' => ['nullable', 'string', 'required_without:context_file'],
             'context_file' => ['nullable', 'file', 'mimes:txt', 'max:5120', 'required_without:context'],
         ]);
 
         $context = $this->resolveContext($request);
-        $dateYmd = Carbon::createFromFormat('m/d/Y', $validated['date'])->format('Y-m-d');
+        $opinionNumber = trim((string) ($validated['opinion_number'] ?? ''));
+        if ($opinionNumber === '') {
+            $opinionNumber = $opinion->opinion_number ?: 'N/A';
+        }
+
+        $dateInput = trim((string) ($validated['date'] ?? ''));
+        $dateYmd = $dateInput !== ''
+            ? Carbon::createFromFormat('m/d/Y', $dateInput)->format('Y-m-d')
+            : ($opinion->date ? $opinion->date->format('Y-m-d') : Carbon::now()->format('Y-m-d'));
+
         $opinion->update([
             'title' => $validated['title'],
-            'opinion_number' => $validated['opinion_number'],
+            'opinion_number' => $opinionNumber,
             'date' => $dateYmd,
             'context' => $context,
         ]);

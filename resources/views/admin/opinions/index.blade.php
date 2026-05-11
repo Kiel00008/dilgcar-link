@@ -2,7 +2,7 @@
     <div class="space-y-8">
         <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
             <div>
-                <h2 class="text-3xl font-bold text-slate-900 tracking-tight">Gallery Library</h2>
+                <h2 class="text-3xl font-bold text-slate-900 tracking-tight">Knowledge Base</h2>
                 <p class="mt-2 text-slate-600">Manage legal opinions used as the chatbot knowledge base.</p>
             </div>
             <a href="{{ route('admin.opinions.create') }}" class="inline-flex items-center justify-center rounded-2xl bg-blue-600 px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-blue-600/20 hover:bg-blue-500 transition-all duration-300">
@@ -56,36 +56,28 @@
 
         <div id="opinions-results" class="overflow-hidden rounded-[2rem] bg-white/80 backdrop-blur-xl ring-1 ring-slate-900/5 shadow-[0_24px_70px_rgba(15,23,42,0.08)]">
             <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
-                    <thead>
-                        <tr class="border-b border-slate-900/5 bg-white/40">
-                            <th class="px-8 py-5 text-[10px] font-bold uppercase tracking-widest text-slate-500">Title</th>
-                            <th class="px-8 py-5 text-[10px] font-bold uppercase tracking-widest text-slate-500">Opinion Number</th>
-                            <th class="px-8 py-5 text-[10px] font-bold uppercase tracking-widest text-slate-500">Date</th>
-                            <th class="px-8 py-5 text-[10px] font-bold uppercase tracking-widest text-slate-500 text-right">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-slate-900/5">
-                        @forelse ($opinions as $opinion)
-                            <tr class="group hover:bg-slate-900/[0.02] transition-colors">
-                                <td class="px-8 py-6">
-                                    <div class="text-sm font-bold text-slate-900">{{ $opinion->title }}</div>
-                                    <div class="mt-1 text-xs font-medium text-slate-500">Updated {{ $opinion->updated_at->diffForHumans() }}</div>
-                                </td>
-                                <td class="px-8 py-6">
-                                    <div class="text-sm font-semibold text-slate-700">{{ $opinion->opinion_number }}</div>
-                                </td>
-                                <td class="px-8 py-6">
-                                    <div class="text-sm font-semibold text-slate-700">{{ optional($opinion->date)->format('m/d/Y') }}</div>
-                                </td>
-                                <td class="px-8 py-6 text-right">
-                                    <div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <a href="{{ route('admin.opinions.show', $opinion) }}" class="p-2 rounded-xl bg-white/70 text-slate-600 hover:text-slate-900 hover:bg-white transition-all shadow-sm">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-5 w-5">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                            </svg>
-                                        </a>
+	                <table class="w-full text-left border-collapse">
+	                    <thead>
+	                        <tr class="border-b border-slate-900/5 bg-white/40">
+	                            <th class="px-8 py-5 text-[10px] font-bold uppercase tracking-widest text-slate-500">Title</th>
+	                            <th class="px-8 py-5 text-[10px] font-bold uppercase tracking-widest text-slate-500 text-right">Actions</th>
+	                        </tr>
+	                    </thead>
+	                    <tbody class="divide-y divide-slate-900/5">
+	                        @forelse ($opinions as $opinion)
+	                            <tr class="group hover:bg-slate-900/[0.02] transition-colors">
+	                                <td class="px-8 py-6">
+	                                    <div class="text-sm font-bold text-slate-900">{{ $opinion->title }}</div>
+	                                    <div class="mt-1 text-xs font-medium text-slate-500">Updated {{ $opinion->updated_at->diffForHumans() }}</div>
+	                                </td>
+	                                <td class="px-8 py-6 text-right">
+	                                    <div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+	                                        <a href="{{ route('admin.opinions.show', $opinion) }}" class="p-2 rounded-xl bg-white/70 text-slate-600 hover:text-slate-900 hover:bg-white transition-all shadow-sm">
+	                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-5 w-5">
+	                                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+	                                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+	                                            </svg>
+	                                        </a>
                                         <a href="{{ route('admin.opinions.edit', $opinion) }}" class="p-2 rounded-xl bg-white/70 text-slate-600 hover:text-blue-600 hover:bg-blue-500/10 transition-all shadow-sm">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-5 w-5">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
@@ -103,13 +95,13 @@
                                     </div>
                                 </td>
                             </tr>
-                        @empty
-                            <tr>
-                                <td class="px-8 py-10 text-center text-slate-500" colspan="4">No legal opinions found.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+	                        @empty
+	                            <tr>
+	                                <td class="px-8 py-10 text-center text-slate-500" colspan="2">No legal opinions found.</td>
+	                            </tr>
+	                        @endforelse
+	                    </tbody>
+	                </table>
             </div>
 
             @if ($opinions->hasPages())
