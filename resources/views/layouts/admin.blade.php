@@ -14,6 +14,25 @@
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @endif
 
+        <script>
+            (() => {
+                const adminThemeStorageKey = 'link-ai-admin-theme';
+                let theme = 'light';
+
+                try {
+                    const savedTheme = localStorage.getItem(adminThemeStorageKey);
+                    if (savedTheme === 'dark' || savedTheme === 'light') {
+                        theme = savedTheme;
+                    }
+                } catch (error) {
+                    theme = 'light';
+                }
+
+                document.documentElement.classList.toggle('dark', theme === 'dark');
+                document.documentElement.dataset.adminTheme = theme;
+            })();
+        </script>
+
         <style>
             :root {
                 --brand-navy: #0b1b4a;
@@ -88,6 +107,92 @@
 
             .admin-shell {
                 background: #ffffff;
+            }
+
+            html {
+                color-scheme: light;
+            }
+
+            html.dark {
+                color-scheme: dark;
+            }
+
+            body,
+            .admin-shell,
+            .admin-header,
+            .admin-sidebar,
+            .sidebar-nav-list,
+            .sidebar-nav-link,
+            .sidebar-chat-item,
+            #sidebar-chat-search,
+            #sidebar-collapse-toggle,
+            #sidebar-profile-trigger {
+                transition: background-color 220ms ease, border-color 220ms ease, color 220ms ease, box-shadow 220ms ease;
+            }
+
+            .admin-header-actions {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                gap: 14px;
+                min-width: 0;
+            }
+
+            .theme-switch {
+                border: 0;
+                min-width: 122px;
+                height: 40px;
+                padding: 0 15px 0 12px;
+                border-radius: 9999px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 9px;
+                background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(241, 245, 249, 0.98) 100%);
+                color: #162033;
+                font-size: 12px;
+                font-weight: 800;
+                letter-spacing: -0.01em;
+                cursor: pointer;
+                box-shadow: 0 12px 24px rgba(15, 23, 42, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+                transition: background-color 180ms ease, color 180ms ease, box-shadow 180ms ease, transform 180ms ease, border-color 180ms ease;
+            }
+
+            .theme-switch__icon-wrap {
+                width: 22px;
+                height: 22px;
+                border-radius: 9999px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                flex: 0 0 auto;
+                background: rgba(15, 23, 42, 0.08);
+                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+            }
+
+            .theme-switch svg {
+                width: 12px;
+                height: 12px;
+                flex: 0 0 auto;
+            }
+
+            .theme-switch:hover {
+                transform: translateY(-1px);
+                box-shadow: 0 15px 30px rgba(15, 23, 42, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.88);
+            }
+
+            .theme-switch:focus-visible {
+                outline: none;
+                box-shadow: 0 0 0 3px rgba(191, 219, 254, 0.4), 0 12px 24px rgba(15, 23, 42, 0.18);
+            }
+
+            .theme-switch__icon-dark {
+                display: none;
+            }
+
+            .theme-switch__label {
+                line-height: 1;
+                transform: translateY(0.5px);
             }
 
             @media (min-width: 1024px) {
@@ -491,9 +596,465 @@
                 background-color: rgba(0, 44, 118, 0.55);
             }
 
+            html.dark body {
+                background: #020617;
+                color: #e2e8f0;
+            }
+
+            html.dark .admin-header {
+                background: linear-gradient(90deg, #020617 0%, #0f172a 50%, #1d4ed8 100%);
+                border-bottom-color: rgba(148, 163, 184, 0.16);
+                box-shadow: 0 16px 40px rgba(2, 6, 23, 0.45);
+            }
+
+            html.dark .admin-header::after {
+                opacity: 0.55;
+                mix-blend-mode: screen;
+            }
+
+            html.dark .admin-shell {
+                background:
+                    radial-gradient(circle at top left, rgba(59, 130, 246, 0.12), transparent 30%),
+                    radial-gradient(circle at top right, rgba(99, 102, 241, 0.10), transparent 28%),
+                    linear-gradient(180deg, #020617 0%, #0f172a 100%);
+            }
+
+            html.dark .admin-sidebar {
+                background: rgba(2, 6, 23, 0.72) !important;
+                border-color: rgba(148, 163, 184, 0.16);
+                box-shadow: 0 24px 60px rgba(2, 6, 23, 0.44);
+            }
+
+            html.dark .sidebar-nav-list {
+                background: rgba(15, 23, 42, 0.82);
+                border-color: rgba(148, 163, 184, 0.14);
+                box-shadow: 0 20px 40px rgba(2, 6, 23, 0.34);
+            }
+
+            html.dark .sidebar-nav-link {
+                color: #e2e8f0 !important;
+                border-bottom-color: rgba(148, 163, 184, 0.10);
+            }
+
+            html.dark .sidebar-nav-link:hover {
+                background: rgba(59, 130, 246, 0.12) !important;
+            }
+
+            html.dark .sidebar-nav-link.active-link {
+                background: rgba(59, 130, 246, 0.18) !important;
+            }
+
+            html.dark .sidebar-nav-icon {
+                background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+                box-shadow: 0 14px 28px rgba(37, 99, 235, 0.26);
+            }
+
+            html.dark .sidebar-chat-item {
+                background-color: rgba(15, 23, 42, 0.90) !important;
+                border-color: rgba(148, 163, 184, 0.14) !important;
+                color: #e2e8f0 !important;
+                box-shadow: 0 16px 34px rgba(2, 6, 23, 0.26) !important;
+            }
+
+            html.dark .sidebar-chat-item:hover {
+                background-color: rgba(30, 41, 59, 0.94) !important;
+            }
+
+            html.dark .sidebar-chat-item.is-active {
+                background-color: rgba(37, 99, 235, 0.18) !important;
+                border-color: rgba(96, 165, 250, 0.42) !important;
+                box-shadow: 0 18px 36px rgba(2, 6, 23, 0.34) !important;
+            }
+
+            html.dark #sidebar-chat-search {
+                background: rgba(15, 23, 42, 0.92);
+                border-color: rgba(148, 163, 184, 0.14);
+                color: #f8fafc;
+            }
+
+            html.dark #sidebar-chat-search::placeholder {
+                color: #94a3b8;
+            }
+
+            html.dark #sidebar-chat-search-clear {
+                color: #94a3b8;
+            }
+
+            html.dark #sidebar-chat-search-clear:hover {
+                background: rgba(148, 163, 184, 0.08);
+                color: #f8fafc;
+            }
+
+            html.dark #sidebar-chat-search-collapsed {
+                color: #ffffff !important;
+                border-color: rgba(255, 255, 255, 0.82);
+                background-color: rgba(15, 23, 42, 0.18);
+                box-shadow: 0 10px 24px rgba(2, 6, 23, 0.22);
+            }
+
+            html.dark #sidebar-chat-search-collapsed svg {
+                color: #ffffff !important;
+            }
+
+            html.dark #sidebar-collapse-toggle,
+            html.dark #sidebar-profile-trigger {
+                background-color: rgba(15, 23, 42, 0.94) !important;
+                border-color: rgba(148, 163, 184, 0.16) !important;
+                color: #f8fafc !important;
+                box-shadow: 0 14px 32px rgba(2, 6, 23, 0.28);
+            }
+
+            html.dark #sidebar-collapse-toggle svg,
+            html.dark #sidebar-profile-trigger svg {
+                color: #cbd5e1 !important;
+            }
+
+            html.dark .sidebar-section-label,
+            html.dark #sidebar-chats-chevron {
+                color: #cbd5e1 !important;
+                opacity: 0.8 !important;
+            }
+
+            html.dark .sidebar-account-details > div:first-child {
+                color: #f8fafc !important;
+            }
+
+            html.dark .sidebar-account-details > div:last-child {
+                color: #94a3b8 !important;
+            }
+
+            html.dark .theme-switch {
+                background: linear-gradient(180deg, rgba(15, 23, 42, 0.96) 0%, rgba(19, 35, 68, 0.96) 100%);
+                color: #f8fafc;
+                box-shadow: 0 14px 28px rgba(2, 6, 23, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+            }
+
+            html.dark .theme-switch:hover {
+                box-shadow: 0 16px 32px rgba(2, 6, 23, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            }
+
+            html.dark .theme-switch:focus-visible {
+                box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.28), 0 14px 28px rgba(2, 6, 23, 0.3);
+            }
+
+            html.dark .theme-switch__icon-wrap {
+                background: rgba(255, 255, 255, 0.10);
+                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            }
+
+            html.dark .theme-switch__icon-light {
+                display: none;
+            }
+
+            html.dark .theme-switch__icon-dark {
+                display: block;
+            }
+
+            body.admin-legal-ai-page {
+                background:
+                    radial-gradient(circle at top left, rgba(59, 130, 246, 0.18), transparent 28%),
+                    radial-gradient(circle at top right, rgba(99, 102, 241, 0.14), transparent 24%),
+                    linear-gradient(180deg, #f1f6ff 0%, #e8eefb 100%);
+            }
+
+            body.admin-legal-ai-page .admin-shell {
+                background:
+                    radial-gradient(circle at 12% 0%, rgba(255, 255, 255, 0.9), transparent 34%),
+                    linear-gradient(180deg, #f4f7ff 0%, #ebf0fb 100%);
+            }
+
+            body.admin-legal-ai-page .admin-header {
+                background: linear-gradient(90deg, #08152d 0%, #0c2247 28%, #123c6c 100%);
+                border-bottom-color: rgba(113, 136, 176, 0.24);
+                box-shadow: 0 18px 40px rgba(10, 19, 41, 0.18);
+            }
+
+            body.admin-legal-ai-page .admin-header::after {
+                background:
+                    radial-gradient(940px 120px at 18% 0%, rgba(255, 255, 255, 0.16) 0%, transparent 56%),
+                    radial-gradient(880px 160px at 84% 16%, rgba(59, 130, 246, 0.14) 0%, transparent 58%);
+                opacity: 1;
+                mix-blend-mode: screen;
+            }
+
+            body.admin-legal-ai-page .admin-header-inner {
+                max-width: none;
+                padding: 12px 18px;
+            }
+
+            body.admin-legal-ai-page .admin-brand {
+                gap: 10px;
+                margin-left: 0;
+            }
+
+            body.admin-legal-ai-page .admin-brand-badge {
+                width: 40px;
+                height: 40px;
+                background: rgba(255, 255, 255, 0.96);
+                border-color: rgba(255, 255, 255, 0.52);
+                box-shadow: 0 8px 18px rgba(2, 6, 23, 0.2);
+            }
+
+            body.admin-legal-ai-page .admin-content {
+                padding: 12px 14px 14px;
+            }
+
+            body.admin-legal-ai-page .admin-grid {
+                gap: 14px !important;
+            }
+
+            @media (min-width: 1024px) {
+                body.admin-legal-ai-page .admin-sidebar {
+                    width: 310px;
+                    min-width: 310px;
+                    flex: 0 0 310px;
+                }
+
+                body.admin-legal-ai-page.sidebar-collapsed .admin-sidebar {
+                    width: 92px;
+                    min-width: 92px;
+                    flex: 0 0 92px;
+                }
+            }
+
+            body.admin-legal-ai-page .admin-sidebar {
+                background: linear-gradient(180deg, rgba(255, 255, 255, 0.88) 0%, rgba(241, 245, 255, 0.84) 100%) !important;
+                border: 1px solid rgba(155, 176, 214, 0.34);
+                border-radius: 24px;
+                box-shadow: 0 24px 54px rgba(64, 87, 135, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+                padding: 14px !important;
+                backdrop-filter: blur(22px);
+            }
+
+            body.admin-legal-ai-page .sidebar-search-expanded {
+                padding-left: 2px;
+                padding-right: 2px;
+            }
+
+            body.admin-legal-ai-page #sidebar-chat-search {
+                height: 42px;
+                border-radius: 14px;
+                border-color: rgba(147, 163, 184, 0.22);
+                background: linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(241, 245, 249, 0.88) 100%);
+                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.88), 0 10px 26px rgba(148, 163, 184, 0.12);
+            }
+
+            body.admin-legal-ai-page .sidebar-icon-box-plain,
+            body.admin-legal-ai-page #sidebar-collapse-toggle,
+            body.admin-legal-ai-page #sidebar-profile-trigger {
+                border-color: rgba(148, 163, 184, 0.24) !important;
+                box-shadow: 0 10px 24px rgba(148, 163, 184, 0.14);
+            }
+
+            body.admin-legal-ai-page .sidebar-nav-list {
+                display: grid;
+                gap: 10px;
+                background: transparent;
+                border: 0;
+                box-shadow: none;
+                overflow: visible;
+            }
+
+            body.admin-legal-ai-page .sidebar-nav-link {
+                min-height: 56px;
+                border: 1px solid rgba(154, 174, 214, 0.24) !important;
+                border-radius: 15px !important;
+                border-bottom: 1px solid rgba(154, 174, 214, 0.24) !important;
+                background: linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(242, 246, 255, 0.84) 100%) !important;
+                box-shadow: 0 14px 28px rgba(148, 163, 184, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.88);
+                backdrop-filter: blur(18px);
+            }
+
+            body.admin-legal-ai-page .sidebar-nav-link:hover {
+                background: linear-gradient(180deg, rgba(235, 243, 255, 0.98) 0%, rgba(223, 235, 255, 0.94) 100%) !important;
+            }
+
+            body.admin-legal-ai-page .sidebar-nav-link.active-link {
+                color: #ffffff !important;
+                border-color: rgba(87, 118, 255, 0.48) !important;
+                background: linear-gradient(135deg, rgba(43, 104, 255, 0.96) 0%, rgba(87, 83, 242, 0.96) 100%) !important;
+                box-shadow: 0 18px 36px rgba(54, 86, 234, 0.28);
+            }
+
+            body.admin-legal-ai-page .sidebar-nav-link.active-link .sidebar-nav-label {
+                color: #ffffff !important;
+            }
+
+            body.admin-legal-ai-page .sidebar-nav-icon {
+                width: 34px;
+                height: 34px;
+                border-radius: 12px;
+                background: rgba(14, 30, 60, 0.86);
+                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+            }
+
+            body.admin-legal-ai-page .sidebar-nav-link.active-link .sidebar-nav-icon {
+                background: rgba(255, 255, 255, 0.16);
+                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+            }
+
+            body.admin-legal-ai-page .sidebar-section-label,
+            body.admin-legal-ai-page #sidebar-chats-chevron {
+                color: rgba(30, 41, 59, 0.72) !important;
+            }
+
+            body.admin-legal-ai-page .sidebar-chat-item {
+                min-height: 42px;
+                border-radius: 14px !important;
+                background: linear-gradient(180deg, rgba(255, 255, 255, 0.88) 0%, rgba(241, 245, 255, 0.82) 100%) !important;
+                border-color: rgba(155, 176, 214, 0.24) !important;
+                box-shadow: 0 14px 26px rgba(148, 163, 184, 0.1) !important;
+            }
+
+            body.admin-legal-ai-page .sidebar-chat-item.is-active {
+                background: linear-gradient(135deg, rgba(230, 238, 255, 0.98) 0%, rgba(214, 228, 255, 0.92) 100%) !important;
+                border-color: rgba(96, 130, 255, 0.38) !important;
+                box-shadow: 0 16px 30px rgba(96, 130, 255, 0.14) !important;
+            }
+
+            body.admin-legal-ai-page .theme-switch {
+                min-width: 96px;
+                height: 30px;
+                padding: 0 12px 0 10px;
+                gap: 7px;
+                border: 1px solid rgba(134, 154, 191, 0.3);
+                background: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(229, 236, 245, 0.96) 100%);
+                color: #1f2937;
+                box-shadow: 0 10px 20px rgba(15, 23, 42, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            }
+
+            body.admin-legal-ai-page .theme-switch__icon-wrap {
+                width: 16px;
+                height: 16px;
+                background: transparent;
+                box-shadow: none;
+            }
+
+            body.admin-legal-ai-page .theme-switch svg {
+                width: 11px;
+                height: 11px;
+            }
+
+            body.admin-legal-ai-page .theme-switch__label {
+                font-size: 11px;
+                font-weight: 700;
+            }
+
+            html.dark body.admin-legal-ai-page {
+                background:
+                    radial-gradient(circle at top left, rgba(36, 83, 255, 0.22), transparent 26%),
+                    radial-gradient(circle at top right, rgba(14, 165, 233, 0.16), transparent 22%),
+                    linear-gradient(180deg, #050a15 0%, #091224 100%);
+            }
+
+            html.dark body.admin-legal-ai-page .admin-shell {
+                background:
+                    radial-gradient(circle at 16% 0%, rgba(31, 78, 216, 0.2), transparent 32%),
+                    radial-gradient(circle at 100% 0%, rgba(25, 96, 173, 0.24), transparent 28%),
+                    linear-gradient(180deg, #050a14 0%, #071120 100%);
+            }
+
+            html.dark body.admin-legal-ai-page .admin-header {
+                background: linear-gradient(90deg, #060c18 0%, #091527 30%, #0f3f6d 100%);
+                border-bottom-color: rgba(87, 112, 160, 0.24);
+                box-shadow: 0 20px 48px rgba(1, 5, 12, 0.44);
+            }
+
+            html.dark body.admin-legal-ai-page .admin-header::after {
+                background:
+                    radial-gradient(900px 120px at 18% 0%, rgba(255, 255, 255, 0.08) 0%, transparent 56%),
+                    radial-gradient(1000px 180px at 84% 10%, rgba(37, 99, 235, 0.18) 0%, transparent 60%);
+                opacity: 0.95;
+            }
+
+            html.dark body.admin-legal-ai-page .admin-sidebar {
+                background:
+                    radial-gradient(circle at top, rgba(49, 91, 211, 0.12), transparent 28%),
+                    linear-gradient(180deg, rgba(8, 14, 29, 0.94) 0%, rgba(9, 15, 29, 0.86) 100%) !important;
+                border-color: rgba(73, 94, 133, 0.42);
+                box-shadow: 0 26px 60px rgba(0, 0, 0, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            }
+
+            html.dark body.admin-legal-ai-page #sidebar-chat-search {
+                border-color: rgba(102, 122, 159, 0.34);
+                background: linear-gradient(180deg, rgba(32, 42, 65, 0.92) 0%, rgba(22, 30, 48, 0.92) 100%);
+                color: #f8fafc;
+                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 14px 28px rgba(0, 0, 0, 0.18);
+            }
+
+            html.dark body.admin-legal-ai-page #sidebar-chat-search::placeholder {
+                color: rgba(203, 213, 225, 0.42);
+            }
+
+            html.dark body.admin-legal-ai-page .sidebar-nav-link {
+                color: #dbe6ff !important;
+                border-color: rgba(79, 96, 130, 0.4) !important;
+                background: linear-gradient(180deg, rgba(13, 21, 37, 0.84) 0%, rgba(11, 18, 31, 0.78) 100%) !important;
+                box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+            }
+
+            html.dark body.admin-legal-ai-page .sidebar-nav-link:hover {
+                background: linear-gradient(180deg, rgba(20, 31, 52, 0.92) 0%, rgba(13, 21, 37, 0.88) 100%) !important;
+            }
+
+            html.dark body.admin-legal-ai-page .sidebar-nav-link.active-link {
+                color: #ffffff !important;
+                border-color: rgba(91, 121, 255, 0.48) !important;
+                background: linear-gradient(135deg, rgba(44, 106, 255, 0.9) 0%, rgba(82, 82, 246, 0.92) 100%) !important;
+                box-shadow: 0 20px 36px rgba(52, 84, 232, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            }
+
+            html.dark body.admin-legal-ai-page .sidebar-nav-icon {
+                background: rgba(255, 255, 255, 0.08);
+                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            }
+
+            html.dark body.admin-legal-ai-page .sidebar-chat-item {
+                background: linear-gradient(180deg, rgba(12, 20, 36, 0.88) 0%, rgba(11, 18, 31, 0.82) 100%) !important;
+                border-color: rgba(75, 95, 131, 0.42) !important;
+                color: #dbeafe !important;
+                box-shadow: 0 18px 32px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.03) !important;
+            }
+
+            html.dark body.admin-legal-ai-page .sidebar-chat-item:hover {
+                background: linear-gradient(180deg, rgba(16, 26, 44, 0.94) 0%, rgba(12, 20, 34, 0.9) 100%) !important;
+            }
+
+            html.dark body.admin-legal-ai-page .sidebar-chat-item.is-active {
+                background: linear-gradient(180deg, rgba(21, 34, 57, 0.98) 0%, rgba(14, 24, 42, 0.92) 100%) !important;
+                border-color: rgba(86, 112, 150, 0.52) !important;
+                box-shadow: 0 20px 36px rgba(0, 0, 0, 0.26), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+            }
+
+            html.dark body.admin-legal-ai-page .sidebar-section-label,
+            html.dark body.admin-legal-ai-page #sidebar-chats-chevron {
+                color: rgba(226, 232, 240, 0.74) !important;
+            }
+
+            html.dark body.admin-legal-ai-page #sidebar-chat-search-collapsed,
+            html.dark body.admin-legal-ai-page #sidebar-collapse-toggle,
+            html.dark body.admin-legal-ai-page #sidebar-profile-trigger {
+                border-color: rgba(82, 102, 139, 0.38) !important;
+                background: linear-gradient(180deg, rgba(16, 25, 43, 0.94) 0%, rgba(12, 19, 32, 0.94) 100%) !important;
+                box-shadow: 0 16px 28px rgba(0, 0, 0, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+            }
+
+            html.dark body.admin-legal-ai-page .theme-switch {
+                min-width: 96px;
+                height: 30px;
+                border-color: rgba(103, 119, 148, 0.34);
+                background: linear-gradient(180deg, rgba(48, 57, 72, 0.96) 0%, rgba(28, 36, 50, 0.96) 100%);
+                color: #edf2ff;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            }
+
+            html.dark body.admin-legal-ai-page .theme-switch__icon-wrap {
+                background: rgba(255, 255, 255, 0.06);
+            }
+
         </style>
     </head>
-    <body class="font-sans antialiased selection:bg-slate-900/10 selection:text-slate-900">
+    <body class="font-sans antialiased bg-slate-100 text-slate-900 selection:bg-slate-900/10 selection:text-slate-900 dark:bg-slate-950 dark:text-slate-100 dark:selection:bg-white/10 dark:selection:text-slate-100 {{ (request()->routeIs('admin.legal.ai*') || request()->routeIs('legal.ai') || request()->routeIs('legal.ai.show')) ? 'admin-legal-ai-page' : '' }}">
         <div class="admin-shell h-screen text-slate-900 overflow-hidden relative" style="display:flex; flex-direction:column; height:100vh;">
             <header class="admin-header">
                 <div class="admin-header-inner">
@@ -510,7 +1071,19 @@
                             <div style="color: rgba(255, 255, 255, 0.78); font-weight: 600; font-size: 10px; line-height: 1.1; letter-spacing: 0.02em; margin-top: 2px;">Guidance and Advisory for Better Administration in Law</div>
                         </div>
                     </div>
-                    <div></div>
+                    <div class="admin-header-actions">
+                        <button type="button" class="theme-switch" id="admin-theme-toggle" aria-label="Toggle theme" aria-pressed="false">
+                            <span class="theme-switch__icon-wrap" aria-hidden="true">
+                                <svg class="theme-switch__icon-light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path d="M10 4.25a.75.75 0 01.75.75v.62a.75.75 0 01-1.5 0V5a.75.75 0 01.75-.75Zm0 9.38a.75.75 0 01.75.75V15a.75.75 0 01-1.5 0v-.62a.75.75 0 01.75-.75Zm5-4.38a.75.75 0 010 1.5h-.62a.75.75 0 010-1.5H15Zm-9.38 0a.75.75 0 010 1.5H5a.75.75 0 010-1.5h.62Zm6.479-3.099a.75.75 0 011.06 0l.44.44a.75.75 0 11-1.06 1.06l-.44-.439a.75.75 0 010-1.061Zm-5.758 5.759a.75.75 0 011.06 0l.439.44a.75.75 0 11-1.06 1.06l-.44-.439a.75.75 0 010-1.061Zm6.818.44a.75.75 0 011.06 1.06l-.439.439a.75.75 0 01-1.06-1.06l.439-.44Zm-5.758-5.759a.75.75 0 010 1.061l-.44.439a.75.75 0 11-1.06-1.06l.44-.44a.75.75 0 011.06 0ZM10 6.35A3.65 3.65 0 1010 13.65 3.65 3.65 0 0010 6.35Z"/>
+                                </svg>
+                                <svg class="theme-switch__icon-dark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path d="M11.056 2.25a.75.75 0 01.135.83A6.45 6.45 0 0010.55 5.9c0 3.562 2.888 6.45 6.45 6.45.973 0 1.895-.216 2.722-.602a.75.75 0 01.964.98A8.252 8.252 0 1110.273 1.286a.75.75 0 01.783.964Z"/>
+                                </svg>
+                            </span>
+                            <span class="theme-switch__label" id="admin-theme-toggle-label">Light</span>
+                        </button>
+                    </div>
                 </div>
             </header>
 
@@ -994,6 +1567,40 @@
             </div>
         </div>
         <script type="module">
+            const adminThemeStorageKey = 'link-ai-admin-theme';
+            const adminThemeToggle = document.getElementById('admin-theme-toggle');
+            const adminThemeToggleLabel = document.getElementById('admin-theme-toggle-label');
+            const setAdminTheme = (theme) => {
+                const normalizedTheme = theme === 'dark' ? 'dark' : 'light';
+                document.documentElement.classList.toggle('dark', normalizedTheme === 'dark');
+                document.documentElement.dataset.adminTheme = normalizedTheme;
+                try {
+                    localStorage.setItem(adminThemeStorageKey, normalizedTheme);
+                } catch (error) {
+                    // Ignore localStorage access issues and keep the in-memory theme state.
+                }
+
+                if (adminThemeToggle) {
+                    const isDark = normalizedTheme === 'dark';
+                    adminThemeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+                    adminThemeToggle.setAttribute('aria-label', isDark ? 'Switch to light theme' : 'Switch to dark theme');
+                }
+
+                if (adminThemeToggleLabel) {
+                    adminThemeToggleLabel.textContent = normalizedTheme === 'dark' ? 'Dark' : 'Light';
+                }
+            };
+
+            const initialAdminTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+            setAdminTheme(initialAdminTheme);
+
+            if (adminThemeToggle) {
+                adminThemeToggle.addEventListener('click', () => {
+                    const nextTheme = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+                    setAdminTheme(nextTheme);
+                });
+            }
+
             const sidebarCollapseBtn = document.getElementById('sidebar-collapse-toggle');
             const sidebarCollapseKey = 'dilg_ai_sidebar_collapsed';
             const sidebarEl = document.getElementById('app-sidebar');

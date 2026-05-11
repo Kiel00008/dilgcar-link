@@ -44,6 +44,18 @@
         box-shadow: 0 0 30px rgba(99, 102, 241, 0.14);
     }
 
+    .dark .pro-input-wrapper {
+        background: rgba(15, 23, 42, 0.82);
+        border-color: rgba(148, 163, 184, 0.16);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+    }
+
+    .dark .pro-input-wrapper:focus-within {
+        background: rgba(15, 23, 42, 0.94);
+        border-color: rgba(96, 165, 250, 0.45);
+        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+    }
+
     .message-bubble-user {
         background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
         box-shadow: 0 12px 30px -10px rgba(37, 99, 235, 0.35);
@@ -53,6 +65,10 @@
         background: transparent;
         border: 0;
         backdrop-filter: none;
+    }
+
+    .dark .message-bubble-ai {
+        color: #e2e8f0;
     }
 
     .chat-user-bubble {
@@ -97,6 +113,16 @@
         width: 18px;
         height: 18px;
         color: rgba(15, 23, 42, 0.72);
+    }
+
+    .dark .chat-msg-tools-btn {
+        border-color: rgba(148, 163, 184, 0.18);
+        background: rgba(15, 23, 42, 0.92);
+        box-shadow: 0 12px 26px rgba(2, 6, 23, 0.28);
+    }
+
+    .dark .chat-msg-tools-btn svg {
+        color: rgba(226, 232, 240, 0.88);
     }
 
     .chat-msg-tools-btn::after {
@@ -184,6 +210,165 @@
         background: rgba(0, 44, 118, 0.92);
         border-color: rgba(0, 44, 118, 0.92);
         color: #ffffff;
+    }
+
+    .dark #chat-scroll h3,
+    .dark #chat-scroll .text-slate-900,
+    .dark #chat-scroll .text-slate-950 {
+        color: #f8fafc !important;
+    }
+
+    .dark #chat-scroll .text-slate-800 {
+        color: #e2e8f0 !important;
+    }
+
+    .dark #chat-scroll .text-slate-500 {
+        color: #94a3b8 !important;
+    }
+
+    .dark .chat-panel > .flex > .border-t {
+        border-color: rgba(148, 163, 184, 0.12) !important;
+        background: rgba(2, 6, 23, 0.48) !important;
+    }
+
+    .dark #chat-prompt {
+        color: #f8fafc !important;
+    }
+
+    .dark #chat-prompt::placeholder {
+        color: #94a3b8 !important;
+    }
+
+    .dark #opinion-modal > .relative {
+        background: #0f172a;
+        color: #e2e8f0;
+        box-shadow: 0 24px 70px rgba(2, 6, 23, 0.54);
+    }
+
+    .dark #opinion-modal #close-opinion-modal {
+        background: rgba(30, 41, 59, 0.94);
+        color: #cbd5e1;
+    }
+
+    .dark #opinion-modal #close-opinion-modal:hover {
+        background: rgba(51, 65, 85, 0.98);
+        color: #f8fafc;
+    }
+
+    body.admin-legal-ai-page .chat-shell {
+        background: transparent;
+    }
+
+    body.admin-legal-ai-page .chat-panel {
+        border-radius: 1.9rem;
+        background:
+            radial-gradient(circle at top, rgba(255, 255, 255, 0.72), transparent 32%),
+            linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(241, 245, 255, 0.86) 100%);
+        border: 1px solid rgba(160, 180, 214, 0.26);
+        box-shadow: 0 24px 60px rgba(69, 88, 130, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.88);
+        backdrop-filter: blur(28px);
+    }
+
+    body.admin-legal-ai-page #chat-scroll {
+        padding: 1.6rem 1.8rem 0.75rem;
+    }
+
+    body.admin-legal-ai-page [data-message-stack="true"] {
+        gap: 2.5rem;
+    }
+
+    body.admin-legal-ai-page .message-bubble-user {
+        background: linear-gradient(135deg, #2d7cff 0%, #5c5cff 100%);
+        box-shadow: 0 18px 34px rgba(62, 94, 233, 0.22);
+    }
+
+    body.admin-legal-ai-page .message-bubble-ai {
+        color: #20314f;
+    }
+
+    body.admin-legal-ai-page .chat-panel > .flex > .border-t {
+        border-top-color: rgba(160, 180, 214, 0.18) !important;
+        background: linear-gradient(180deg, rgba(243, 247, 255, 0.7) 0%, rgba(236, 241, 252, 0.82) 100%) !important;
+        backdrop-filter: blur(26px);
+    }
+
+    body.admin-legal-ai-page .pro-input-wrapper {
+        border-radius: 1.35rem;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(241, 245, 255, 0.9) 100%);
+        border-color: rgba(165, 184, 218, 0.24);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 18px 34px rgba(148, 163, 184, 0.12);
+    }
+
+    body.admin-legal-ai-page .pro-input-wrapper:focus-within {
+        border-color: rgba(83, 118, 255, 0.34);
+        box-shadow: 0 0 0 4px rgba(93, 118, 255, 0.08), 0 18px 34px rgba(148, 163, 184, 0.16);
+    }
+
+    body.admin-legal-ai-page #chat-prompt {
+        font-size: 14px !important;
+    }
+
+    body.admin-legal-ai-page #chat-send {
+        width: 42px;
+        height: 42px;
+        border-radius: 9999px;
+        background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%) !important;
+        color: #ffffff !important;
+        box-shadow: 0 16px 28px rgba(61, 92, 230, 0.26);
+    }
+
+    body.admin-legal-ai-page #chat-send svg {
+        color: #ffffff !important;
+    }
+
+    html.dark body.admin-legal-ai-page .chat-panel {
+        background:
+            radial-gradient(circle at top, rgba(49, 91, 211, 0.08), transparent 32%),
+            linear-gradient(180deg, rgba(9, 16, 31, 0.92) 0%, rgba(10, 17, 31, 0.82) 100%);
+        border-color: rgba(82, 102, 139, 0.42);
+        box-shadow: 0 30px 70px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+
+    html.dark body.admin-legal-ai-page #chat-scroll {
+        color: #dbeafe;
+    }
+
+    html.dark body.admin-legal-ai-page .message-bubble-user {
+        background: linear-gradient(135deg, #2f74ff 0%, #5b54ff 100%);
+        box-shadow: 0 20px 36px rgba(44, 106, 255, 0.24);
+    }
+
+    html.dark body.admin-legal-ai-page .message-bubble-ai {
+        color: #dbeafe;
+    }
+
+    html.dark body.admin-legal-ai-page .chat-panel > .flex > .border-t {
+        border-top-color: rgba(73, 94, 133, 0.34) !important;
+        background: linear-gradient(180deg, rgba(10, 17, 31, 0.7) 0%, rgba(8, 14, 25, 0.82) 100%) !important;
+    }
+
+    html.dark body.admin-legal-ai-page .pro-input-wrapper {
+        background: linear-gradient(180deg, rgba(31, 42, 65, 0.92) 0%, rgba(18, 26, 42, 0.9) 100%);
+        border-color: rgba(75, 95, 131, 0.4);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 18px 36px rgba(0, 0, 0, 0.22);
+    }
+
+    html.dark body.admin-legal-ai-page .pro-input-wrapper:focus-within {
+        border-color: rgba(92, 116, 255, 0.46);
+        box-shadow: 0 0 0 4px rgba(51, 82, 214, 0.12), 0 18px 36px rgba(0, 0, 0, 0.26);
+    }
+
+    html.dark body.admin-legal-ai-page #chat-prompt {
+        color: #edf2ff !important;
+    }
+
+    html.dark body.admin-legal-ai-page #chat-prompt::placeholder {
+        color: rgba(203, 213, 225, 0.42) !important;
+    }
+
+    html.dark body.admin-legal-ai-page #chat-send {
+        background: linear-gradient(135deg, #2f74ff 0%, #5a54ff 100%) !important;
+        box-shadow: 0 18px 32px rgba(43, 103, 255, 0.26);
     }
 
     .ref-accordion {
