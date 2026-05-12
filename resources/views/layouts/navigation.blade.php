@@ -11,7 +11,7 @@
                                 <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                             </div>
                             <div class="min-w-0">
-                                <div class="text-[15px] font-black tracking-tight leading-tight text-white">{{ config('app.name', 'Link - Ai') }}</div>
+                                <div class="text-[15px] font-black tracking-tight leading-tight text-white">{{ config('app.name', 'Local Intelligence & Network Knowledgebase Assistant') }}</div>
                                 <div class="text-[10px] font-semibold leading-tight tracking-wide text-white/80">Guidance and Advisory for Better Administration in Law</div>
                             </div>
                         </div>

@@ -836,7 +836,7 @@
                     <div class="gov-brand__main">
                         <div class="gov-brand__content">
                             <div class="gov-brand__product">
-                                <div class="gov-brand__product-name">Link - Ai</div>
+                                <div class="gov-brand__product-name">Local Intelligence & Network Knowledgebase Assistant</div>
                                 <div class="gov-brand__product-copy">Guidance and Advisory for Better Administration in Law</div>
                             </div>
 

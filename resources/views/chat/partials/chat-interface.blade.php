@@ -218,6 +218,36 @@
         color: #f8fafc !important;
     }
 
+    .isko-ai-figure {
+        position: absolute;
+        right: 22px;
+        bottom: 104px;
+        z-index: 8;
+        pointer-events: none;
+        user-select: none;
+        width: 160px;
+        max-width: min(160px, 22vw);
+        opacity: 0.98;
+        filter: drop-shadow(0 22px 40px rgba(15, 23, 42, 0.18));
+        transform: translateZ(0);
+    }
+
+    .isko-ai-figure__img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .dark .isko-ai-figure {
+        filter: drop-shadow(0 22px 46px rgba(0, 0, 0, 0.45));
+    }
+
+    @media (max-width: 640px) {
+        .isko-ai-figure {
+            display: none;
+        }
+    }
+
     .dark #chat-scroll .text-slate-800 {
         color: #e2e8f0 !important;
     }
@@ -722,7 +752,7 @@
 
 <div class="chat-shell chat-shell-with-lex h-full min-h-0 {{ $isPro ? '' : 'px-4 py-4 sm:px-6 lg:px-8' }}">
     <div class="mx-auto flex h-full min-h-0 w-full {{ $isPro ? 'max-w-full' : 'max-w-[1700px]' }}">
-        <section class="chat-panel flex h-full min-h-0 w-full flex-col overflow-hidden rounded-[2.5rem]">
+        <section class="chat-panel relative flex h-full min-h-0 w-full flex-col overflow-hidden rounded-[2.5rem]">
             <div class="flex flex-1 min-h-0 flex-col">
                 <div class="h-2"></div>
 
@@ -739,7 +769,7 @@
                                 >
                             </div>
                         </div>
-                        <h3 class="text-3xl font-black tracking-tight {{ $isPro ? 'text-slate-900' : 'text-slate-950' }}">What can Link AI assist you today?</h3>
+                        <h3 class="text-3xl font-black tracking-tight {{ $isPro ? 'text-slate-900' : 'text-slate-950' }}">What can Local Intelligence & Network Knowledgebase Assistant assist you today?</h3>
                         <p class="mt-4 max-w-md text-lg text-slate-500 font-medium leading-relaxed">Ask about legal opinions.</p>
                     </div>
                 @else
@@ -751,7 +781,7 @@
                                         {{ $message->role === 'user' ? 'You' : 'LX' }}
                                     </div>
                                     <div class="min-w-0">
-                                        <div class="text-xs font-black uppercase tracking-[0.2em] {{ $isPro ? 'text-slate-900 dark:text-slate-100' : 'text-slate-900 dark:text-slate-100' }}">{{ $message->role === 'user' ? 'You' : 'Link AI' }}</div>
+                                        <div class="text-xs font-black uppercase tracking-[0.2em] {{ $isPro ? 'text-slate-900 dark:text-slate-100' : 'text-slate-900 dark:text-slate-100' }}">{{ $message->role === 'user' ? 'You' : 'Local Intelligence & Network Knowledgebase Assistant' }}</div>
                                     </div>
                                 </div>
 
@@ -778,6 +808,10 @@
                         @endforeach
                     </div>
                 @endif
+            </div>
+
+            <div class="isko-ai-figure">
+                <img src="{{ asset('images/isko_ai.png') }}" alt="ISKO AI" class="isko-ai-figure__img">
             </div>
 
             <div class="border-t {{ $isPro ? 'border-slate-900/[0.03] bg-white/50' : 'border-slate-200/50 bg-white/70' }} px-6 py-4 sm:px-8 sm:py-5">
@@ -919,7 +953,7 @@
 
         const label = document.createElement('div');
         label.className = 'text-xs font-black uppercase tracking-[0.2em] ' + (isPro ? 'text-slate-900' : 'text-slate-900');
-        label.textContent = role === 'user' ? 'You' : 'Link AI';
+        label.textContent = role === 'user' ? 'You' : 'Local Intelligence & Network Knowledgebase Assistant';
 
         metaText.appendChild(label);
         meta.appendChild(avatar);

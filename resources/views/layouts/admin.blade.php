@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Link - Ai') }}</title>
+        <title>{{ config('app.name', 'Local Intelligence & Network Knowledgebase Assistant') }}</title>
 
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700&display=swap" rel="stylesheet" />
@@ -1067,7 +1067,7 @@
                             >
                         </div>
                         <div style="min-width: 0;">
-                            <div style="color: #ffffff; font-weight: 800; font-size: 15px; line-height: 1.1; letter-spacing: -0.01em;">{{ config('app.name', 'Link - Ai') }}</div>
+                            <div style="color: #ffffff; font-weight: 800; font-size: 15px; line-height: 1.1; letter-spacing: -0.01em;">{{ config('app.name', 'Local Intelligence & Network Knowledgebase Assistant') }}</div>
                             <div style="color: rgba(255, 255, 255, 0.78); font-weight: 600; font-size: 10px; line-height: 1.1; letter-spacing: 0.02em; margin-top: 2px;">Guidance and Advisory for Better Administration in Law</div>
                         </div>
                     </div>

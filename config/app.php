@@ -20,7 +20,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Link - Ai'),
+    'name' => env('APP_NAME', 'Local Intelligence & Network Knowledgebase Assistant'),
 
     /*
     |--------------------------------------------------------------------------

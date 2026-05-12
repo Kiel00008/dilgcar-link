@@ -35,7 +35,7 @@
 
     <div style="position: absolute; left: 0; top: 258px; width: 310px; z-index: 2;">
         <p class="text-sm font-semibold uppercase tracking-[0.38em] text-cyan-200/90">
-            <span>Link - Ai</span>
+            <span>Local Intellegence and Network Knowledgebase Assistant</span>
             <span class="mt-2 block text-[11px] font-semibold normal-case tracking-wide text-white/80">Guidance and Advisory for Better Administration in Law</span>
         </p>
         <h2 class="mt-5 text-[46px] font-semibold leading-[1.08] tracking-[-0.04em] text-white">
