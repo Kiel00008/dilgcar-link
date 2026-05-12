@@ -1193,6 +1193,17 @@
                                 </div>
                                 <span class="sidebar-nav-label text-sm font-semibold">Archive</span>
                             </a>
+
+                            @if (auth()->check() && auth()->user()->is_admin)
+                                <a href="{{ route('admin.users.index') }}" class="sidebar-nav-link {{ request()->routeIs('admin.users.*') ? 'active-link' : '' }} flex items-center gap-3 px-4 py-3 transition-all">
+                                    <div class="sidebar-nav-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="h-5 w-5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 001.591-.079 8.88 8.88 0 01-.894 2.368 9.087 9.087 0 01-6.231 3.892A9.029 9.029 0 015.555 15a9 9 0 018.087-8.787c.263.02.526.028.79.028a8.997 8.997 0 018.887 5.169c.309.655.635 1.295.974 1.911M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg>
+                                    </div>
+                                    <span class="sidebar-nav-label text-sm font-semibold">User Management</span>
+                                </a>
+                            @endif
                             </nav>
                         </div>
 
